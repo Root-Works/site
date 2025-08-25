@@ -1,1 +1,31 @@
-body { font-family: sans-serif; margin: 40px; } header nav { text-align: center; margin-bottom: 20px; } nav a { margin: 0 10px; text-decoration: none; } footer { margin-top: 40px; font-size: 0.9em; text-align: center; }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px auto;
+    max-width: 800px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    padding: 0 20px;
+}
+a {
+    color: #0066cc;
+    text-decoration: none;
+    margin: 0 10px;
+}
+a:hover {
+    text-decoration: underline;
+}
+nav {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+footer {
+    margin-top: 60px;
+    font-size: 0.9em;
+    color: #999;
+    text-align: center;
+}
