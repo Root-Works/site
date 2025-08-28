@@ -3,10 +3,127 @@ layout: default
 title: 고객지원 - RootWorks
 ---
 
-<h2>고객지원</h2>
-<p>문의 유형에 따라 아래 방법으로 연락해주세요.</p>
-<ul style="text-align:left; display:inline-block;">
-  <li>대표 이메일: <a href="mailto:root@rootworks.co.kr">root@rootworks.co.kr</a></li>
-  <li>고객지원: <a href="mailto:help@rootworks.co.kr">help@rootworks.co.kr</a></li>
-  <li>기타 문의: <a href="mailto:contact@rootworks.co.kr">contact@rootworks.co.kr</a></li>
-  </ul>
+<h2 class="center">고객지원</h2>
+<p class="center">문의 유형에 따라 아래 메일 주소를 클릭해 복사하세요.</p>
+
+<div class="copy-list">
+  <div class="copy-row">
+    <span class="label">대표 이메일</span>
+    <code id="addr-root">root@rootworks.co.kr</code>
+    <button class="copy-btn" data-target="addr-root" aria-label="대표 이메일 복사">복사</button>
+  </div>
+
+  <div class="copy-row">
+    <span class="label">고객지원</span>
+    <code id="addr-help">help@rootworks.co.kr</code>
+    <button class="copy-btn" data-target="addr-help" aria-label="고객지원 메일 복사">복사</button>
+  </div>
+
+  <div class="copy-row">
+    <span class="label">기타 문의</span>
+    <code id="addr-contact">contact@rootworks.co.kr</code>
+    <button class="copy-btn" data-target="addr-contact" aria-label="기타 문의 메일 복사">복사</button>
+  </div>
+</div>
+
+<div id="copy-toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- 복사 스크립트: Clipboard API + 폴백 -->
+<script>
+(function () {
+  function showToast(msg) {
+    const t = document.getElementById('copy-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1600);
+  }
+
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // 폴백: 임시 textarea
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      showToast('복사되었습니다 ✅');
+    } catch (e) {
+      showToast('복사에 실패했습니다 ❌');
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    const id = btn.getAttribute('data-target');
+    const el = document.getElementById(id);
+    if (el) copyText(el.textContent.trim());
+  });
+})();
+</script>
+
+<!-- 페이지 한정 스타일(전역 style.css 건드리지 않도록 최소 범위로) -->
+<style>
+.copy-list {
+  max-width: 640px;
+  margin: 24px auto 0;
+  padding: 0 12px;
+}
+.copy-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  background: #fff;
+}
+.copy-row .label {
+  width: 92px;
+  color: var(--muted, #666);
+  font-weight: 600;
+}
+.copy-row code {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.copy-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: #f8fafc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.copy-btn:hover { background: #eef2ff; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: rgba(17,17,17,.9);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+</style>
