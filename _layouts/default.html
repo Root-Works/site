@@ -1,21 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
-
-  <!-- ✨ 경로는 항상 relative_url 사용 -->
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
 </head>
 <body>
-  {% include header.html %}
-  {% include nav.html %}
+  <header class="site-header">
+    <h1>RootWorks</h1>
+    <p>작은 루틴에서 시작하는 큰 변화</p>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-row">
+      <a href="{{ '/' | relative_url }}">홈</a><span class="sep">|</span>
+      <a href="{{ '/company.html' | relative_url }}">회사소개</a><span class="sep">|</span>
+      <a href="{{ '/support.html' | relative_url }}">고객지원</a>
+    </div>
+    <div class="nav-row">
+      <a href="{{ '/app/nowcrave/' | relative_url }}">지금땡겨</a><span class="sep">|</span>
+      <a href="#">Rooting</a><span class="sep">|</span>
+      <a href="#">ThinkRoot</a><span class="sep">|</span>
+      <a href="#">RootRefort</a>
+    </div>
+  </nav>
 
   <main class="container">
     {{ content }}
   </main>
 
-  {% include footer.html %}
+  <footer class="site-footer">
+    <p>&copy; 2025 RootWorks. All rights reserved.</p>
+    <p>
+      사업자등록번호: 758-13-02733 | 대표: 송창현<br>
+      대표 이메일: <a href="mailto:root@rootworks.co.kr">root@rootworks.co.kr</a> |
+      고객지원: <a href="mailto:help@rootworks.co.kr">help@rootworks.co.kr</a> |
+      기타문의: <a href="mailto:contact@rootworks.co.kr">contact@rootworks.co.kr</a>
+    </p>
+  </footer>
 </body>
 </html>
