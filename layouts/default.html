@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title | default: "RootWorks" }}</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="site-header center">
+    <h1>RootWorks</h1>
+    <p>작은 루틴에서 시작하는 큰 변화</p>
+  </header>
+
+  {% include nav.html %}
+
+  <main class="center-content">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+</body>
+</html>

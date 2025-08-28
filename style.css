@@ -3,17 +3,16 @@
   --bg:#ffffff;
   --text:#111111;
   --muted:#666666;
-  --link:#2563eb;    /* 파란 링크 */
+  --link:#2563eb;
   --link-hover:#1e40af;
-  --border:#e5e7eb;  /* 연한 회색 */
+  --border:#e5e7eb;
   --maxw:800px;
   --radius:14px;
 }
 
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
+html,body{ height:100%; margin:0; padding:0; }
 body{
-  margin:0;
   background:var(--bg);
   color:var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Apple SD Gothic Neo, "Noto Sans KR", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
@@ -21,41 +20,58 @@ body{
 }
 
 /* 공통 레이아웃 */
-main{ max-width:var(--maxw); margin:0 auto; padding:0 20px 40px; }
-header, nav, footer{ padding:16px 20px; }
+.container, main {
+  max-width: var(--maxw);
+  margin: 0 auto;       /* 화면 중앙 배치 */
+  padding: 0 20px 40px; /* 좌우 여백 */
+  text-align: left;     /* 기본은 왼쪽 정렬 */
+}
+
+/* 필요시 중앙 정렬 */
+.center { text-align: center; }
+.center-content {
+  max-width: var(--maxw);
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
 
 /* 헤더 */
-header{
+.site-header, header{
   text-align:center;
 }
-header h1{
+.site-header h1, header h1{
   margin:18px 0 6px;
   font-size:42px;
   font-weight:800;
   letter-spacing:.2px;
 }
-header p{
+.site-header p, header p{
   margin:0;
   color:var(--muted);
   font-size:15px;
 }
 
-/* 네비게이션 */
-nav{
+/* 네비게이션 (두 줄 메뉴 지원) */
+.nav{
   text-align:center;
   margin-bottom:30px;
   border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);
+  padding:12px 0;
+  line-height:2;
 }
-nav a{
+.nav-row{ margin:2px 0; }
+.nav a{
   display:inline-block;
-  padding:10px 8px;
+  padding:8px 6px;
   color:var(--link);
   text-decoration:none;
   font-weight:500;
 }
-nav a:hover,
-nav a:focus{ color:var(--link-hover); text-decoration:underline; }
+.nav a:hover,
+.nav a:focus{ color:var(--link-hover); text-decoration:underline; }
+.sep{ color:#999; margin:0 6px; }
 
 /* 본문 타이포 */
 h2{ font-size:24px; margin:24px 0 8px; }
@@ -70,26 +86,18 @@ hr{
   margin:24px 0;
 }
 
-/* 푸터 */
-footer{
+/* 푸터 공통 */
+.site-footer, footer{
   text-align:center;
   color:var(--muted);
   border-top:1px solid var(--border);
   font-size:14px;
+  padding:20px;
 }
 
-/* 카드/박스가 필요할 때(옵션) */
-.section{
-  max-width:var(--maxw);
-  margin:18px auto;
-  padding:18px;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:#fff;
-}
-
-/* 반응형 소폭 조정 */
+/* 반응형 */
 @media (max-width:520px){
   header h1{ font-size:34px; }
-  nav a{ padding:10px 6px; }
+  .nav a{ padding:10px 6px; }
+  .sep { margin: 0 4px; }
 }
